@@ -22,14 +22,14 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel VerticalAlignment="Top">
-            <Button Style="{StaticResource ParentButton}" Content="Главная" Command="{Binding PageNavigationH}"/>
-            <Button Style="{StaticResource ParentButton}" Content="Финансы"/>
-            <Button Style="{StaticResource ParentButton}" Content="Работники"/>
-            <Button Style="{StaticResource ParentButton}" Content="Арендодатели"/>
-            <Button Style="{StaticResource ParentButton}" Content="ТПК Зоны"/>
+            <Button Style="{StaticResource ParentButton}" Content="Главная" Command="{Binding PageNavigation}"/>
+            <Button Style="{StaticResource ParentButton}" Content="Финансы" Command="{Binding PageNavigationF}"/>
+            <Button Style="{StaticResource ParentButton}" Content="Работники" Command="{Binding PageNavigationEm}"/>
+            <Button Style="{StaticResource ParentButton}" Content="Арендодатели" Command="{Binding PageNavigationAgreement}"/>
+            <Button Style="{StaticResource ParentButton}" Content="ТПК Зоны" Command="{Binding PageNavigationTPK}"/>
         </StackPanel>
 
-        <Frame Grid.Column="1" Source="{Binding }"
+        <Frame Grid.Column="1" x:Name="frame" NavigationUIVisibility="Hidden"
                BorderBrush="LimeGreen" BorderThickness="2"/>
     </Grid>
 </Window>

@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Kursach_1125.View
 {
     /// <summary>
-    /// Логика взаимодействия для Home.xaml
+    /// Логика взаимодействия для TPKZonePage.xaml
     /// </summary>
-    public partial class Home : Window
+    public partial class TPKZonePage : Page
     {
-        public Home()
+        public TPKZonePage()
         {
             InitializeComponent();
         }
