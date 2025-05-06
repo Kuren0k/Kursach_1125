@@ -11,6 +11,7 @@
         <Style x:Key="Button" TargetType="Button">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0 10 0 10"/>
         </Style>
     </Page.Resources>
     <Grid>

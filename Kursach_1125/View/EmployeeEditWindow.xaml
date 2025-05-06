@@ -6,11 +6,45 @@
         xmlns:local="clr-namespace:Kursach_1125.View"
         mc:Ignorable="d"
         Title="EmployeeEditWindow" Height="450" Width="400">
+    <Window.Resources>
+        <Style x:Key="text" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0 15 0 0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="Box" TargetType="TextBox">
+            <Setter Property="Margin" Value="5 15 10 0"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <Style x:Key="Combo" TargetType="ComboBox">
+            <Setter Property="Margin" Value="5 15 10 0"/>
+            <Setter Property="Height" Value="21"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        
+        <StackPanel>
+            <TextBlock Text="Имя" Style="{DynamicResource text}"/>
+            <TextBlock Text="Фамилия" Style="{DynamicResource text}"/>
+            <TextBlock Text="Отчество" Style="{DynamicResource text}"/>
+            <TextBlock Text="Номер" Style="{DynamicResource text}"/>
+            <TextBlock Text="Название работы" Style="{DynamicResource text}"/>
+            <TextBlock Text="ТПК Зона" Style="{DynamicResource text}"/>
+            <TextBlock Text="Флюрография" Style="{DynamicResource text}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBox Style="{DynamicResource Box}"/>
+            <TextBox Style="{DynamicResource Box}"/>
+            <TextBox Style="{DynamicResource Box}"/>
+            <TextBox Style="{DynamicResource Box}"/>
+            <ComboBox Style="{DynamicResource Combo}"/>
+            <ComboBox Style="{DynamicResource Combo}"/>
+            <CheckBox Margin="10 15 10 0"/>
+        </StackPanel>
+        <Button Content="Сохранить"  Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
     </Grid>
 </Window>

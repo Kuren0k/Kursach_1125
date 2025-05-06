@@ -7,8 +7,29 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TPKZonePage">
-
+    <Page.Resources>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0 10 0 10"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="30 10 30 10">
+            <TextBlock Text="ТПК Зоны" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="16"/>
+            <ListView Height="300" Margin="0 20 0 0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="10 30 10 30">
+            <Button Content="Добавить" Style="{DynamicResource Button}"/>
+            <Button Content="Редактировать" Style="{DynamicResource Button}"/>
+            <Button Content="Удалить" Style="{DynamicResource Button}"/>
+        </StackPanel>
+
     </Grid>
 </Page>
