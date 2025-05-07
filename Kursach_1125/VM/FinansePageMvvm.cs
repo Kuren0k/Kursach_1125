@@ -35,17 +35,12 @@ namespace Kursach_1125.VM
             = new ISeries[]
             {
                 new PieSeries<double> { Values = new double[] { 2 } },
-                new PieSeries<double> { Values = new double[] { 4 } },
-                new PieSeries<double> { Values = new double[] { 1 } },
-                new PieSeries<double> { Values = new double[] { 4 } },
-                new PieSeries<double> { Values = new double[] { 3 } }
+                new PieSeries<double> { Values = new double[] { 4 } }
             };
 
         public LabelVisual Title { get; set; } =
             new LabelVisual
             {
-                Text = "My chart title",
-                TextSize = 25,
                 Padding = new LiveChartsCore.Drawing.Padding(15)
             };
     }

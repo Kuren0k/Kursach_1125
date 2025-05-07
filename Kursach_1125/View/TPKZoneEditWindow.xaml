@@ -1,0 +1,45 @@
+﻿<Window x:Class="Kursach_1125.View.TPKZoneEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach_1125.View"
+        xmlns:mvvm="clr-namespace:Kursach_1125.VM"
+        mc:Ignorable="d"
+        DataContext="{DynamicResource vm}"
+        Title="TPKZoneEditWindow" Height="450" Width="400">
+    <Window.Resources>
+        <mvvm:TPKZoneEditWindowMvvm x:Key="vm"/>
+        <Style x:Key="Box" TargetType="TextBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="0 0 0 25"/>
+        </Style>
+        <Style x:Key="text" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0 0 0 30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="0,30,0,0">
+            <TextBlock Text="Название" Style="{DynamicResource text}"/>
+            <TextBlock Text="Этаж" Style="{DynamicResource text}"/>
+            <TextBlock Text="Площадь" Style="{DynamicResource text}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="20,30,20,0" DataContext="{Binding NewZone}">
+            <TextBox Style="{DynamicResource Box}" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{DynamicResource Box}" Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{DynamicResource Box}" Text="{Binding Square, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        <Button Content="Сохранить изменения" Command="{Binding InsertZone}" Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
+    </Grid>
+</Window>
