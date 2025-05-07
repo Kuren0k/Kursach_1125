@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kursach_1125.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Kursach_1125.View
     /// </summary>
     public partial class TPKZonePage : Page
     {
+
+
         public TPKZonePage()
         {
             InitializeComponent();
+            DataContext = this;
         }
     }
 }
