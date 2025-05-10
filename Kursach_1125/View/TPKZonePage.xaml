@@ -28,7 +28,7 @@
             <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Zones}" SelectedItem="{Binding SelectedZone}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Title}"/>
+                        <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Title}" />
                         <GridViewColumn Header="Этаж" DisplayMemberBinding="{Binding Floor}"/>
                         <GridViewColumn Header="Площадь" DisplayMemberBinding="{Binding Square}"/>
                     </GridView>
@@ -38,7 +38,7 @@
 
         <StackPanel Grid.Column="1" Margin="10 30 10 30">
             <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddZone}"/>
-            <Button Content="Редактировать" Style="{DynamicResource Button}"/>
+            <Button Content="Редактировать" Style="{DynamicResource Button}" Command="{Binding UpdateZone}"/>
             <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveZone}"/>
         </StackPanel>
 

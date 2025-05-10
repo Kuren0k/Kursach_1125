@@ -73,13 +73,13 @@ namespace Kursach_1125.Model
                     {
                         int id = dr.GetInt32(0);
                         string title = string.Empty;
-                        if (dr.IsDBNull(1))
+                        if (!dr.IsDBNull(1))
                             title = dr.GetString("Title");
                         int floor = 0;
-                        if (dr.IsDBNull(2))
+                        if (!dr.IsDBNull(2))
                             floor = dr.GetInt32(2);
                         int square = 0;
-                        if (dr.IsDBNull(3))
+                        if (!dr.IsDBNull(3))
                             square = dr.GetInt32(3);
                         zones.Add(new TPKZone
                         {

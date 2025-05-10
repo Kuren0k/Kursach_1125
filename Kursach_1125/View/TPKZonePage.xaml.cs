@@ -21,12 +21,10 @@ namespace Kursach_1125.View
     /// </summary>
     public partial class TPKZonePage : Page
     {
-
-
         public TPKZonePage()
         {
             InitializeComponent();
-            DataContext = this;
+            
         }
     }
 }

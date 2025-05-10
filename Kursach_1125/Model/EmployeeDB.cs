@@ -8,5 +8,6 @@ namespace Kursach_1125.Model
 {
     class EmployeeDB
     {
+
     }
 }

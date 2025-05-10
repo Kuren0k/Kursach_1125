@@ -65,7 +65,7 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `ID`, `TentantID`, `TPKZoneID`, `DateOfSigninig`, `EndDate`, `RentalRate`, `Status` form `Agreement`");
+                var command = connection.CreateCommand("select `ID`, `TentantID`, `TPKZoneID`, `DateOfSigning`, `EndDate`, `RentalRate`, `Status` from `Agreement`");
                 try
                 {
                     MySqlDataReader dr = command.ExecuteReader();
@@ -80,12 +80,12 @@ namespace Kursach_1125.Model
                             dateOfS = dr.GetDateTime("DateOfSigninig");
                         DateTime endDate = DateTime.Now;
                         if (!dr.IsDBNull(4))
-                            dateOfS = dr.GetDateTime("EndDate");
+                            endDate = dr.GetDateTime("EndDate");
                         int rentalRate = 0;
-                        if (dr.IsDBNull(5))
+                        if (!dr.IsDBNull(5))
                             rentalRate = dr.GetInt32(5);
                         bool status= false;
-                        if (dr.IsDBNull(6))
+                        if (!dr.IsDBNull(6))
                             status = dr.GetBoolean(6);
                         agreements.Add(new Agreement
                         {
@@ -116,7 +116,7 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Agreement` set `TentantID`=@tentantID, `TPKZoneID`=@tpkZoneID, `DateOfString`=@dateOfS, `EndDate`=@endDate, `RentalRate`=@rentalRate, `Status`=@status where `ID` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Agreement` set `TentantID`=@tentantID, `TPKZoneID`=@tpkZoneID, `DateOfSigning`=@dateOfS, `EndDate`=@endDate, `RentalRate`=@rentalRate, `Status`=@status where `ID` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("tentantID", edit.TentantID));
                 mc.Parameters.Add(new MySqlParameter("tpkZoneID", edit.TPKZoneID));
                 mc.Parameters.Add(new MySqlParameter("dateOfS", edit.DateOfString));

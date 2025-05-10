@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kursach_1125.Model;
+using Kursach_1125.VM;
 
 namespace Kursach_1125.View
 {
@@ -19,9 +21,10 @@ namespace Kursach_1125.View
     /// </summary>
     public partial class AgreementEditWindow : Window
     {
-        public AgreementEditWindow()
+        public AgreementEditWindow(Agreement agreement)
         {
             InitializeComponent();
+            ((AgreementEditWindowMvvm)this.DataContext).SetClose(Close);
         }
     }
 }

@@ -4,10 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach_1125.View"
+      xmlns:mvvm="clr-namespace:Kursach_1125.VM"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{DynamicResource vm}"
       Title="AgreementPage">
     <Page.Resources>
+        <mvvm:AgreementPageMvvm x:Key="vm"/>
         <Style x:Key="Button" TargetType="Button">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -22,13 +25,24 @@
 
         <StackPanel Margin="30 10 30 10">
             <TextBlock Text="Арендодатели" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="16"/>
-            <ListView Height="300" Margin="0 20 0 0"/>
+            <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Agreements}" SelectedItem="{Binding SelectedAgreement}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Арендодатель"/>
+                        <GridViewColumn Header="Кампания"/>
+                        <GridViewColumn Header="Дата подписания"/>
+                        <GridViewColumn Header="Дата окончания"/>
+                        <GridViewColumn Header="Арендная плата"/>
+                        <GridViewColumn Header="Статус"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10 30 10 30">
-            <Button Content="Добавить" Style="{DynamicResource Button}"/>
+            <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddAgreement}"/>
             <Button Content="Редактировать" Style="{DynamicResource Button}"/>
-            <Button Content="Удалить" Style="{DynamicResource Button}"/>
+            <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveAgreement}"/>
         </StackPanel>
 
     </Grid>
