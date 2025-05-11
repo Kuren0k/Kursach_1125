@@ -25,7 +25,8 @@
             <Button Style="{StaticResource ParentButton}" Content="Главная" Command="{Binding PageNavigation}"/>
             <Button Style="{StaticResource ParentButton}" Content="Финансы" Command="{Binding PageNavigationF}"/>
             <Button Style="{StaticResource ParentButton}" Content="Работники" Command="{Binding PageNavigationEm}"/>
-            <Button Style="{StaticResource ParentButton}" Content="Арендодатели" Command="{Binding PageNavigationAgreement}"/>
+            <Button Style="{StaticResource ParentButton}" Content="Договоры" Command="{Binding PageNavigationAgreement}"/>
+            <Button Style="{StaticResource ParentButton}" Content="Арендодатели" Command="{Binding PageNavigationTentant}"/>
             <Button Style="{StaticResource ParentButton}" Content="ТПК Зоны" Command="{Binding PageNavigationTPK}"/>
         </StackPanel>
 

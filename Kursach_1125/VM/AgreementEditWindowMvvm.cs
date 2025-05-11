@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace Kursach_1125.VM
 {
     internal class AgreementEditWindowMvvm : BaseVM
     {
+
         private Agreement newAgreement = new();
 
         public Agreement NewAgreement
@@ -21,10 +23,14 @@ namespace Kursach_1125.VM
             }
         }
 
+        public ObservableCollection<TPKZone> TPKZonesList { get; set; }
+
         public CommandMvvm InsertAgreement { get; set; }
 
         public AgreementEditWindowMvvm()
         {
+            TPKZonesList = new ObservableCollection<TPKZone>(TPKZoneDB.GetDB().SelectAll());
+
             InsertAgreement = new CommandMvvm(() =>
             {
                 if (newAgreement.Id == 0)
@@ -36,8 +42,8 @@ namespace Kursach_1125.VM
                 close?.Invoke();
             },
                 () =>
-                NewAgreement.TentantID != 0 &&
-                NewAgreement.TPKZoneID != 0 &&
+                NewAgreement.Tentants != null &&
+                NewAgreement.TPKZones != null &&
                 NewAgreement.DateOfString != DateTime.Now &&
                 NewAgreement.EndDate != DateTime.Now &&
                 NewAgreement.RentalRate > 0 &&

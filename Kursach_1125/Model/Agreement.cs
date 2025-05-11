@@ -15,5 +15,7 @@ namespace Kursach_1125.Model
         public DateTime EndDate { get; set; }
         public int RentalRate { get; set; }
         public bool Status { get; set; }
+        public Tentant Tentants { get; set; }
+        public TPKZone TPKZones { get; set; }
     }
 }

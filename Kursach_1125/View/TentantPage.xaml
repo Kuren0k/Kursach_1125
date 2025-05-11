@@ -1,4 +1,4 @@
-﻿<Page x:Class="Kursach_1125.View.AgreementPage"
+﻿<Page x:Class="Kursach_1125.View.TentantPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,9 +8,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       DataContext="{DynamicResource vm}"
-      Title="AgreementPage">
+      Title="TentantPage">
     <Page.Resources>
-        <mvvm:AgreementPageMvvm x:Key="vm"/>
+        <mvvm:TentantPageMvvm x:Key="vm"/>
         <Style x:Key="Button" TargetType="Button">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -24,25 +24,20 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Margin="30 10 30 10">
-            <TextBlock Text="Договор" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="16"/>
-            <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Agreements}" SelectedItem="{Binding SelectedAgreement}">
+            <TextBlock Text="Арендодатели" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="16"/>
+            <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Tentants}" SelectedItem="{Binding SelectedTentant}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Арендодатель"/>
-                        <GridViewColumn Header="Кампания"/>
-                        <GridViewColumn Header="Дата подписания"/>
-                        <GridViewColumn Header="Дата окончания"/>
-                        <GridViewColumn Header="Арендная плата"/>
-                        <GridViewColumn Header="Статус"/>
                     </GridView>
                 </ListView.View>
             </ListView>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10 30 10 30">
-            <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddAgreement}"/>
+            <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddTentant}"/>
             <Button Content="Редактировать" Style="{DynamicResource Button}"/>
-            <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveAgreement}"/>
+            <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveTentant}"/>
         </StackPanel>
 
     </Grid>

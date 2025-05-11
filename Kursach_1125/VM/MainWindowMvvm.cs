@@ -15,12 +15,14 @@ namespace Kursach_1125.VM
         public CommandMvvm PageNavigationEm { get; set; }
         public CommandMvvm PageNavigationF { get; set; }
         public CommandMvvm PageNavigationAgreement { get; set; }
+        public CommandMvvm PageNavigationTentant { get; set; }
         public CommandMvvm PageNavigationTPK { get; set; }
         private Frame frame;
         FinansePage finanse;
         HomePage home;
         EmployeePage employee;
         AgreementPage agreement;
+        TentantPage tentant;
         TPKZonePage tPKZone;
         public MainWindowMvvm()
         { 
@@ -52,6 +54,16 @@ namespace Kursach_1125.VM
                     agreement = new AgreementPage();
                 }
                 frame.Navigate(agreement);
+            },
+            () => true);
+
+            PageNavigationTentant = new CommandMvvm(() =>
+            {
+                if (tentant == null)
+                {
+                    tentant = new TentantPage();
+                }
+                frame.Navigate(tentant);
             },
             () => true);
 
