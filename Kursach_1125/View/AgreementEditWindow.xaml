@@ -43,7 +43,10 @@
             ItemsSource="{Binding DataContext.TPKZonesList, RelativeSource={RelativeSource AncestorType=Window}}"
             SelectedItem="{Binding TPKZones}"
             DisplayMemberPath="Title"/>
-            <ComboBox Height="25" Margin="0 0 0 26" Text="{Binding Tentants.Title}"/>
+            <ComboBox Height="25" Margin="0 0 0 26"
+            ItemsSource="{Binding DataContext.TentantsList, RelativeSource={RelativeSource AncestorType=Window}}"
+            SelectedItem="{Binding Tentants}"
+            DisplayMemberPath="Title"/>
             <DatePicker Height="25" Margin="0 0 0 25" Text="{Binding DateOfString}"/>
             <DatePicker Height="25" Margin="0 0 0 24" Text="{Binding EndDate}"/>
             <TextBox Style="{DynamicResource Box}" Text="{Binding RentalRate}"/>

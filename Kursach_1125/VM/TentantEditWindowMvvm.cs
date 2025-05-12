@@ -9,22 +9,23 @@ namespace Kursach_1125.VM
 {
     internal class TentantEditWindowMvvm : BaseVM
     {
-    private Tentant newTentant = new();
+        private Tentant newTentant = new();
 
-    public Tentant NewTentant
+        public Tentant NewTentant
         {
-        get => newTentant;
-        set
-        {
-            newTentant = value;
-            Signal();
+            get => newTentant;
+            set
+            {
+                newTentant = value;
+                Signal();
+            }
         }
-    }
 
-    public CommandMvvm InsertTentant { get; set; }
+        public CommandMvvm InsertTentant { get; set; }
 
-    public TentantEditWindowMvvm()
-    {
+        public TentantEditWindowMvvm()
+        {
+            
             InsertTentant = new CommandMvvm(() =>
         {
             if (newTentant.Id == 0)
@@ -42,16 +43,16 @@ namespace Kursach_1125.VM
             !string.IsNullOrEmpty(NewTentant.Email) &&
             NewTentant.RentalStartDate != DateTime.Now);
 
-    }
-    public void SetZone(Tentant selectedTentant)
-    {
-        NewTentant = selectedTentant;
-    }
+        }
+        public void SetZone(Tentant selectedTentant)
+        {
+            NewTentant = selectedTentant;
+        }
 
-    Action close;
-    internal void SetClose(Action close)
-    {
-        this.close = close;
+        Action close;
+        internal void SetClose(Action close)
+        {
+            this.close = close;
+        }
     }
-}
 }

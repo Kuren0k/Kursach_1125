@@ -28,7 +28,11 @@
             <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Tentants}" SelectedItem="{Binding SelectedTentant}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Арендодатель"/>
+                        <GridViewColumn Header="Название кампании" DisplayMemberBinding="{Binding Title}"/>
+                        <GridViewColumn Header="Контакное лицо" DisplayMemberBinding="{Binding ContactPerson}"/>
+                        <GridViewColumn Header="Номер телефона" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                        <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                        <GridViewColumn Header="Дата начала аренды" DisplayMemberBinding="{Binding RentalStartDate}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -36,7 +40,7 @@
 
         <StackPanel Grid.Column="1" Margin="10 30 10 30">
             <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddTentant}"/>
-            <Button Content="Редактировать" Style="{DynamicResource Button}"/>
+            <Button Content="Редактировать" Style="{DynamicResource Button}" Command="{Binding UpdateTentant}"/>
             <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveTentant}"/>
         </StackPanel>
 

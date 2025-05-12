@@ -28,12 +28,13 @@
             <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Agreements}" SelectedItem="{Binding SelectedAgreement}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Арендодатель"/>
-                        <GridViewColumn Header="Кампания"/>
-                        <GridViewColumn Header="Дата подписания"/>
-                        <GridViewColumn Header="Дата окончания"/>
-                        <GridViewColumn Header="Арендная плата"/>
-                        <GridViewColumn Header="Статус"/>
+                        <GridViewColumn Header="Кампания" DisplayMemberBinding="{Binding Tentants.Title}"/>
+                        <GridViewColumn Header="Контактное лицо" DisplayMemberBinding="{Binding Tentants.ContactPerson}"/>
+                        <GridViewColumn Header="ТПК Зона" DisplayMemberBinding="{Binding TPKZones.Title}"/>
+                        <GridViewColumn Header="Дата подписания" DisplayMemberBinding="{Binding DateOfString}"/>
+                        <GridViewColumn Header="Дата окончания" DisplayMemberBinding="{Binding EndDate}"/>
+                        <GridViewColumn Header="Арендная плата" DisplayMemberBinding="{Binding RentalRate}"/>
+                        <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Status}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

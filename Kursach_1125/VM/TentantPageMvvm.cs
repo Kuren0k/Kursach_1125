@@ -43,6 +43,7 @@ namespace Kursach_1125.VM
             UpdateTentant = new CommandMvvm(() =>
             {
                 new TentantEditWindow(SelectedTentant).ShowDialog();
+                TentantDB.GetDB().Remove(SelectedTentant);
                 SelectAll();
             }, () => SelectedTentant != null);
 
@@ -62,6 +63,7 @@ namespace Kursach_1125.VM
         private void SelectAll()
         {
             Tentants = new ObservableCollection<Tentant>(TentantDB.GetDB().SelectAll());
+            
         }
     }
 }

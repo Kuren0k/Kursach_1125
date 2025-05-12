@@ -27,7 +27,7 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Tentant` Values (0, @contactPerson, @phoneNumber, @email, @rentalStartDate); select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Tentant` Values (0, @title, @contactPerson, @phoneNumber, @email, @rentalStartDate); select LAST_INSERT_ID();");
 
                 cmd.Parameters.Add(new MySqlParameter("title", tentant.Title));
                 cmd.Parameters.Add(new MySqlParameter("contactPerson", tentant.ContactPerson));

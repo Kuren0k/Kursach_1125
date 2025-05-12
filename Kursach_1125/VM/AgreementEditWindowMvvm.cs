@@ -24,15 +24,19 @@ namespace Kursach_1125.VM
         }
 
         public ObservableCollection<TPKZone> TPKZonesList { get; set; }
+        public ObservableCollection<Tentant> TentantsList { get; set; }
 
         public CommandMvvm InsertAgreement { get; set; }
 
         public AgreementEditWindowMvvm()
         {
             TPKZonesList = new ObservableCollection<TPKZone>(TPKZoneDB.GetDB().SelectAll());
+            TentantsList = new ObservableCollection<Tentant>(TentantDB.GetDB().SelectAll());
 
             InsertAgreement = new CommandMvvm(() =>
             {
+                NewAgreement.TentantID = NewAgreement.Tentants.Id;
+                NewAgreement.TPKZoneID = NewAgreement.TPKZones.Id;
                 if (newAgreement.Id == 0)
                     AgreementDB.GetDB().Insert(NewAgreement);
                 else

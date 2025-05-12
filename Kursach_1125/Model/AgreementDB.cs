@@ -27,9 +27,11 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Agreement` Values (0, @dateofS, @endDate, @rentalR, @status); select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Agreement` Values (0, @tentant, @tpkZ, @dateOfS, @endDate, @rentalR, @status); select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("dateodS", agreement.DateOfString));
+                cmd.Parameters.Add(new MySqlParameter("tentant", agreement.TentantID));
+                cmd.Parameters.Add(new MySqlParameter("tpkZ", agreement.TPKZoneID));
+                cmd.Parameters.Add(new MySqlParameter("dateOfS", agreement.DateOfString));
                 cmd.Parameters.Add(new MySqlParameter("endDate", agreement.EndDate));
                 cmd.Parameters.Add(new MySqlParameter("rentalR", agreement.RentalRate));
                 cmd.Parameters.Add(new MySqlParameter("status", agreement.Status));
@@ -66,8 +68,8 @@ namespace Kursach_1125.Model
             if (connection.OpenConnection())
             {
                 var command = connection.CreateCommand("select a.`ID`, `TentantID`, `TPKZoneID`, `DateOfSigning`, `EndDate`, `RentalRate`, `Status`, " +
-                    "t.`Title`, t.`PhoneNumber`, t.`Email`, t.`ID`, " +
-                    "p.`Title`, p.`Floor`, p.`ID` from `Agreement` a JOIN `Tentant` t ON `TentantID` = t.ID JOIN `TPKZone` p ON `TPKZoneID` = p.`ID`");
+                    "t.`Title` as tTitle, t.`ContactPerson`, t.`Email`, t.`ID`," +
+                    "p.`Title` as pTitle, p.`Floor`, p.`ID` from `Agreement` a JOIN `Tentant` t ON `TentantID` = t.ID JOIN `TPKZone` p ON `TPKZoneID` = p.`ID`");
                 try
                 {
                     MySqlDataReader dr = command.ExecuteReader();
@@ -91,17 +93,17 @@ namespace Kursach_1125.Model
                             status = dr.GetBoolean(6);
                         string Ttitle = string.Empty;
                         if (!dr.IsDBNull(7))
-                            Ttitle = dr.GetString("t.Title");
-                        string phoneNumber = string.Empty;
+                            Ttitle = dr.GetString("tTitle");
+                        string contactPerson = string.Empty;
                         if (!dr.IsDBNull(8))
-                            phoneNumber = dr.GetString("t.PhoneNumber");
+                            contactPerson = dr.GetString("ContactPerson");
                         string Email = string.Empty;
                         if (!dr.IsDBNull(9))
-                            Email = dr.GetString("t.Email");
+                            Email = dr.GetString("Email");
                         int idTentant = dr.GetInt32(10);
                         string Ptitle = string.Empty;
                         if (!dr.IsDBNull(11))
-                            Ptitle = dr.GetString("p.Title");
+                            Ptitle = dr.GetString("pTitle");
                         int floor = 0;
                         if (!dr.IsDBNull(12))
                             floor = dr.GetInt32(12);
@@ -111,7 +113,7 @@ namespace Kursach_1125.Model
 
                         tentant.Id = idTentant;
                         tentant.Title = Ttitle;
-                        tentant.PhoneNumber = phoneNumber;
+                        tentant.ContactPerson = contactPerson;
                         tentant.Email = Email;
 
                         TPKZone tPKZone = new TPKZone();
