@@ -16,9 +16,9 @@ namespace Kursach_1125.Model
         public void Config()
         {
             MySqlConnectionStringBuilder sb = new MySqlConnectionStringBuilder();
-            sb.UserID = "student";
-            sb.Password = "student";
-            sb.Server = "192.168.200.13";
+            sb.UserID = "root";
+            sb.Password = "qazwsx_57";
+            sb.Server = "localhost";
             sb.Database = "1125_EZZKA";
             sb.CharacterSet = "utf8mb4";
             _connection = new MySqlConnection(sb.ToString());

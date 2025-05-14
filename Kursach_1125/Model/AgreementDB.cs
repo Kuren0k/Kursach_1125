@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Spire.Doc;
+using System.IO;
 
 namespace Kursach_1125.Model
 {
@@ -69,7 +71,7 @@ namespace Kursach_1125.Model
             {
                 var command = connection.CreateCommand("select a.`ID`, `TentantID`, `TPKZoneID`, `DateOfSigning`, `EndDate`, `RentalRate`, `Status`, " +
                     "t.`Title` as tTitle, t.`ContactPerson`, t.`Email`, t.`ID`," +
-                    "p.`Title` as pTitle, p.`Floor`, p.`ID` from `Agreement` a JOIN `Tentant` t ON `TentantID` = t.ID JOIN `TPKZone` p ON `TPKZoneID` = p.`ID`");
+                    "p.`Title` as pTitle, p.`Floor`, p.`ID`, t.`PhoneNumber` from `Agreement` a JOIN `Tentant` t ON `TentantID` = t.ID JOIN `TPKZone` p ON `TPKZoneID` = p.`ID`");
                 try
                 {
                     MySqlDataReader dr = command.ExecuteReader();
@@ -108,6 +110,9 @@ namespace Kursach_1125.Model
                         if (!dr.IsDBNull(12))
                             floor = dr.GetInt32(12);
                         int idTPKZone = dr.GetInt32(13);
+                        string phone = string.Empty;
+                        if (!dr.IsDBNull(14))
+                            phone = dr.GetString("PhoneNumber");
 
                         Tentant tentant = new Tentant();
 
@@ -115,6 +120,7 @@ namespace Kursach_1125.Model
                         tentant.Title = Ttitle;
                         tentant.ContactPerson = contactPerson;
                         tentant.Email = Email;
+                        tentant.PhoneNumber = phone;
 
                         TPKZone tPKZone = new TPKZone();
 
@@ -137,7 +143,7 @@ namespace Kursach_1125.Model
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Пошёл нахуй");
                 }
             }
             connection.CloseConnection();
@@ -196,6 +202,66 @@ namespace Kursach_1125.Model
             }
             connection.CloseConnection();
             return result;
+        }
+
+        public bool GenerateAgreementDocAndSaveToDb(Agreement agreement)
+        {
+            try
+            {
+                string templatePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates", "AgreementTemplate.docx");
+                if (!File.Exists(templatePath))
+                {
+                    MessageBox.Show($"Шаблон не найден: {templatePath}");
+                }
+                string outputFolder = "GeneratedDocs";
+                if (!Directory.Exists(outputFolder))
+                    Directory.CreateDirectory(outputFolder);
+
+                string fileName = $"Agreement_{agreement.Id}_{DateTime.Now:yyyyMMddHHmmss}.docx";
+                string outputPath = Path.Combine(outputFolder, fileName);
+
+                // 1. Генерация DOCX
+                Document document = new Document();
+                document.LoadFromFile(templatePath);
+
+                document.Replace("#ID#", agreement.Id.ToString(), false, true);
+                document.Replace("#CompanyName#", agreement.Tentants.Title, false, true);
+                document.Replace("#ContactPerson#", agreement.Tentants.ContactPerson, false, true);
+                document.Replace("#TPKZone#", agreement.TPKZones.Title, false, true);
+                document.Replace("#Phone#", agreement.Tentants.PhoneNumber, false, true);
+                document.Replace("#Square#", agreement.TPKZones.Square.ToString(), false, true);
+                document.Replace("#DateOfSigning#", agreement.DateOfString.ToString("dd.MM.yyyy"), false, true);
+                document.Replace("#EndDate#", agreement.EndDate.ToString("dd.MM.yyyy"), false, true);
+                document.Replace("#RentalRate#", agreement.RentalRate.ToString(), false, true);
+                document.Replace("#Status#", agreement.Status ? "Активен" : "Неактивен", false, true);
+                document.Replace("#Date#",DateTime.Now.ToString("dd.MM.yyyy"), false, true);
+
+                document.SaveToFile(outputPath, FileFormat.Docx);
+                document.Dispose();
+
+                // 2. Сохранение информации о файле в базе
+                if (connection.OpenConnection())
+                {
+                    var cmd = connection.CreateCommand(
+                        "INSERT INTO AgreementDocument (AgreementID, FilePath, CreateDate) VALUES (@agreementId, @filePath, @createdDate)");
+                    cmd.Parameters.Add(new MySqlParameter("agreementId", agreement.Id));
+                    cmd.Parameters.Add(new MySqlParameter("filePath", outputPath));
+                    cmd.Parameters.Add(new MySqlParameter("createdDate", DateTime.Now));
+
+                    cmd.ExecuteNonQuery();
+                }
+                connection.CloseConnection();
+
+                // 3. Открыть файл после генерации
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(outputPath) { UseShellExecute = true });
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при создании договора: " + ex.Message);
+                return false;
+            }
         }
 
         static AgreementDB db;

@@ -4,8 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach_1125.View"
-      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
-      xmlns:vms="clr-namespace:Kursach_1125.VM"
+      xmlns:vms="clr-namespace:Kursach_1125.VM" 
+      xmlns:lvc1="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FinansePage">
@@ -13,23 +13,17 @@
         <vms:FinansePageMvvm/>
     </Page.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
-        <StackPanel Margin="20 30 20 0">
-            <TextBlock Text="Соотошение доходов и расходов за этот месяц" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="14" TextWrapping="Wrap"/>
-            <lvc:PieChart
-        Series="{Binding Series1}"
-        Title="{Binding Title}"
-                Height="350">
-            </lvc:PieChart>
+        <StackPanel>
+            <TextBlock Text="Соотошение доходов и расходов" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="14" TextWrapping="Wrap"/>
+            <lvc1:PieChart Height="350" LegendLocation="Bottom" Hoverable="False" Margin="0,30,0,0">
+                <lvc1:PieChart.Series>
+                    <lvc1:PieSeries Title="Доход" Values="{Binding FinansePieChartModel.IncomeDataSeries}" DataLabels="True"/>
+                    <lvc1:PieSeries Title="Расходы" Values="{Binding FinansePieChartModel.ConsumptionDataSeries}" DataLabels="True"/>
+                </lvc1:PieChart.Series>
+            </lvc1:PieChart>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="20 30 20 0">
-            <TextBlock Text="Соотношение доходов прошлых месяцев" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="14" TextWrapping="Wrap"/>
-            <lvc:CartesianChart Series="{Binding Series}" YAxes="{Binding YAxes}" Height="350"/>
-        </StackPanel>
+        
     </Grid>
 </Page>

@@ -1,23 +1,23 @@
-﻿using MySqlConnector;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySqlConnector;
 using System.Windows;
 
 namespace Kursach_1125.Model
 {
-    internal class TPKZoneDB
+    internal class ExpensesDB
     {
         DBConnection connection;
 
-        private TPKZoneDB(DBConnection db)
+        private ExpensesDB(DBConnection db)
         {
             this.connection = db;
         }
 
-        public bool Insert(TPKZone zone)
+        public bool Insert(Expenses expenses)
         {
             bool result = false;
             if (connection == null)
@@ -27,11 +27,10 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `TPKZone` Values (0, @title, @floor, @square); select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Expenses` Values (0, @title, @cost); select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("title", zone.Title));
-                cmd.Parameters.Add(new MySqlParameter("floor", zone.Floor));
-                cmd.Parameters.Add(new MySqlParameter("square", zone.Square));
+                cmd.Parameters.Add(new MySqlParameter("title", expenses.Title));
+                cmd.Parameters.Add(new MySqlParameter("cost", expenses.Cost));
 
                 try
                 {
@@ -39,7 +38,7 @@ namespace Kursach_1125.Model
                     if (id > 0)
                     {
                         MessageBox.Show(id.ToString());
-                        zone.Id = id;
+                        expenses.Id = id;
                         result = true;
                     }
                     else
@@ -56,15 +55,15 @@ namespace Kursach_1125.Model
             return result;
         }
 
-        internal List<TPKZone> SelectAll()
+        internal List<Expenses> SelectAll()
         {
-            List<TPKZone> zones = new List<TPKZone>();
+            List<Expenses> expenses = new List<Expenses>();
             if (connection == null)
-            { return zones; }
+            { return expenses; }
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `ID`, `Title`, `Floor`, `Square` from `TPKZone`");
+                var command = connection.CreateCommand("select `ID`, `Title`, `Cost` from `Expenses`");
                 try
                 {
                     MySqlDataReader dr = command.ExecuteReader();
@@ -75,31 +74,27 @@ namespace Kursach_1125.Model
                         string title = string.Empty;
                         if (!dr.IsDBNull(1))
                             title = dr.GetString("Title");
-                        int floor = 0;
+                        int cost = 0;
                         if (!dr.IsDBNull(2))
-                            floor = dr.GetInt32(2);
-                        int square = 0;
-                        if (!dr.IsDBNull(3))
-                            square = dr.GetInt32(3);
-                        zones.Add(new TPKZone
+                            cost = dr.GetInt32(2);
+                        expenses.Add(new Expenses
                         {
                             Id = id,
                             Title = title,
-                            Floor = floor,
-                            Square = square
+                            Cost = cost
                         });
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Пошёл нахуй");
+                    MessageBox.Show(ex.Message);
                 }
             }
             connection.CloseConnection();
-            return zones;
+            return expenses;
         }
 
-        internal bool Update(TPKZone zone)
+        internal bool Update(Expenses expenses)
         {
             bool result = false;
             if (connection == null)
@@ -107,10 +102,9 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `TPKZone` set `Title`=@title, `Floor`=@floor, `Square`=@square where `ID` = {zone.Id}");
-                mc.Parameters.Add(new MySqlParameter("title", zone.Title));
-                mc.Parameters.Add(new MySqlParameter("floor", zone.Floor));
-                mc.Parameters.Add(new MySqlParameter("square", zone.Square));
+                var mc = connection.CreateCommand($"update `Expenses` set `Title`=@title, `Cost`=@cost where `ID` = {expenses.Id}");
+                mc.Parameters.Add(new MySqlParameter("title", expenses.Title));
+                mc.Parameters.Add(new MySqlParameter("cost", expenses.Cost));
 
                 try
                 {
@@ -126,7 +120,7 @@ namespace Kursach_1125.Model
             return result;
         }
 
-        internal bool Remove(TPKZone remove)
+        internal bool Remove(Expenses remove)
         {
             bool result = false;
             if (connection == null)
@@ -134,7 +128,7 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `TPKZone` where `ID` = {remove.Id}");
+                var mc = connection.CreateCommand($"delete from `Expenses` where `ID` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -142,18 +136,18 @@ namespace Kursach_1125.Model
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Пошли нахуй");
+                    MessageBox.Show(ex.Message);
                 }
             }
             connection.CloseConnection();
             return result;
         }
 
-        static TPKZoneDB db;
-        public static TPKZoneDB GetDB()
+        static ExpensesDB db;
+        public static ExpensesDB GetDB()
         {
             if (db == null)
-                db = new TPKZoneDB(DBConnection.GetDbConnection());
+                db = new ExpensesDB(DBConnection.GetDbConnection());
             return db;
         }
     }

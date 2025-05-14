@@ -24,6 +24,11 @@ namespace Kursach_1125.View
         public AgreementEditWindow(Agreement agreement)
         {
             InitializeComponent();
+            var vm = new AgreementEditWindowMvvm();
+            vm.NewAgreement = agreement;
+            vm.SetClose(() => this.Close());
+
+            DataContext = vm;
             ((AgreementEditWindowMvvm)this.DataContext).SetClose(Close);
         }
     }

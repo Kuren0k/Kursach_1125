@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Kursach_1125.Model
 {
-    public class Payment
+    public class AgreementDocument
     {
         public int Id { get; set; }
         public int AgreementId { get; set; }
-        public int Sum { get; set; }
-        public DateTime PaymentDate { get; set; }
-        public bool Status { get; set; }
+        public string FilePath { get; set; }
+        public DateTime CreateDate { get; set; }
+        public Agreement Agreements { get; set; }
     }
 }

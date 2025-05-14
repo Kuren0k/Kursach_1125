@@ -7,23 +7,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using LiveCharts;
-using LiveCharts.Wpf;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LiveCharts.Defaults;
 
 namespace Kursach_1125.View
 {
     /// <summary>
-    /// Логика взаимодействия для FinansePage.xaml
+    /// Логика взаимодействия для ExpensesPage.xaml
     /// </summary>
-    public partial class FinansePage : Page
+    public partial class ExpensesPage : Page
     {
-        public FinansePage()
+        public ExpensesPage()
         {
             InitializeComponent();
         }

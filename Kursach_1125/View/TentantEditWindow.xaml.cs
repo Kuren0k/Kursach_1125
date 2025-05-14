@@ -24,6 +24,11 @@ namespace Kursach_1125.View
         public TentantEditWindow(Tentant tentant)
         {
             InitializeComponent();
+            var vm = new TentantEditWindowMvvm();
+            vm.NewTentant = tentant;
+            vm.SetClose(() => this.Close());
+
+            DataContext = vm;
             ((TentantEditWindowMvvm)this.DataContext).SetClose(Close);
         }
     }

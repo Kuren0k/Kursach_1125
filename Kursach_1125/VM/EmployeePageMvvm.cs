@@ -43,7 +43,6 @@ namespace Kursach_1125.VM
             UpdateEmployee = new CommandMvvm(() =>
             {
                 new EmployeeEditWindow(SelectedEmployee).ShowDialog();
-                EmployeeDB.GetDB().Remove(SelectedEmployee);
                 SelectAll();
             }, () => SelectedEmployee != null);
 
@@ -63,7 +62,6 @@ namespace Kursach_1125.VM
         private void SelectAll()
         {
             Employees = new ObservableCollection<Employee>(EmployeeDB.GetDB().SelectAll());
-
         }
     }
 }

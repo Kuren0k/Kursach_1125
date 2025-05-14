@@ -24,6 +24,11 @@ namespace Kursach_1125.View
         public EmployeeEditWindow(Employee employee)
         {
             InitializeComponent();
+            var vm = new EmployeeEditWindowMvvm();
+            vm.NewEmployee = employee;
+            vm.SetClose(() => this.Close());
+
+            DataContext = vm;
             ((EmployeeEditWindowMvvm)this.DataContext).SetClose(Close);
         }
     }

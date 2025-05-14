@@ -1,5 +1,4 @@
-﻿using Kursach_1125.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +11,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kursach_1125.Model;
 using Kursach_1125.VM;
 
 namespace Kursach_1125.View
 {
     /// <summary>
-    /// Логика взаимодействия для TPKZoneEditWindow.xaml
+    /// Логика взаимодействия для ExpensesEditWindow.xaml
     /// </summary>
-    public partial class TPKZoneEditWindow : Window
+    public partial class ExpensesEditWindow : Window
     {
-        public TPKZoneEditWindow(TPKZone zone)
+        public ExpensesEditWindow(Expenses expenses)
         {
             InitializeComponent();
-            var vm = new TPKZoneEditWindowMvvm();
-            vm.NewZone = zone;
+            var vm = new ExpensesEditWindowMvvm();
+            vm.NewExpenses = expenses;
             vm.SetClose(() => this.Close());
 
             DataContext = vm;
-            ((TPKZoneEditWindowMvvm)this.DataContext).SetClose(Close);
+            ((ExpensesEditWindowMvvm)this.DataContext).SetClose(Close);
         }
     }
 }

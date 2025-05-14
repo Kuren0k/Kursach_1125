@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Kursach_1125.Model
 {
-    public class TaskJob
+    public class Expenses
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public int Cost { get; set; }
     }
 }

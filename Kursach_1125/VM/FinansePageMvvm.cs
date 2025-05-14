@@ -1,48 +1,38 @@
-﻿using LiveChartsCore.Kernel.Sketches;
-using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore;
-using SkiaSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kursach_1125.Model;
 using LiveCharts;
-using LiveChartsCore.Kernel;
-using LiveChartsCore.SkiaSharpView.Extensions;
-using LiveChartsCore.SkiaSharpView.VisualElements;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 
 namespace Kursach_1125.VM
 {
-    internal class FinansePageMvvm
+    internal class FinansePageMvvm : BaseVM
     {
-        public ISeries[] Series { get; set; } = [
-        new LineSeries<int> { Values = [10, 55, 45, 68, 60, 70, 75, 78] }
-    ];
+        public FinansePieChartDataModel FinansePieChartModel { get; set; }
+        public Func<ChartPoint, string> PointLabel { get; set; }
 
-        public ICartesianAxis[] YAxes { get; set; } = [
-            new Axis
+        
+        public FinansePageMvvm()
         {
-            CustomSeparators = [0, 10, 25, 50, 100],
-            MinLimit = 0,
-            MaxLimit = 100,
-            SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(100))
+            SelectAll();
+            PointLabel = chartPoint => string.Format("{0}({1:P})", chartPoint.Y, chartPoint.Participation);
+            
         }
-        ];
-
-        public ISeries[] Series1 { get; set; }
-            = new ISeries[]
-            {
-                new PieSeries<double> { Values = new double[] { 2 } },
-                new PieSeries<double> { Values = new double[] { 4 } }
-            };
-
-        public LabelVisual Title { get; set; } =
-            new LabelVisual
-            {
-                Padding = new LiveChartsCore.Drawing.Padding(15)
-            };
+        private void SelectAll()
+        {
+            List<Employee> allEmployee = EmployeeDB.GetDB().SelectAll();
+            List<Expenses> allExpenses = ExpensesDB.GetDB().SelectAll();
+            List<Agreement> allAgreement  = AgreementDB.GetDB().SelectAll();
+            int totalCost = allExpenses.Sum(e => e.Cost);
+            totalCost += allEmployee.Sum(e => e.JobTitles.Wages);
+            int totalIncome = allAgreement.Sum(e => e.RentalRate);
+            FinansePieChartModel = new FinansePieChartDataModel(totalCost, totalIncome);
+        }
     }
 }
 

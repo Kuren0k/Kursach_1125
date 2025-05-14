@@ -11,22 +11,33 @@ namespace Kursach_1125.VM
 {
     internal class MainWindowMvvm : BaseVM
     {
-        public CommandMvvm PageNavigation { get; set; }
         public CommandMvvm PageNavigationEm { get; set; }
+        public CommandMvvm PageNavigationDocument { get; set; }
         public CommandMvvm PageNavigationF { get; set; }
         public CommandMvvm PageNavigationAgreement { get; set; }
         public CommandMvvm PageNavigationTentant { get; set; }
         public CommandMvvm PageNavigationTPK { get; set; }
+        public CommandMvvm PageNavigationExpenses { get; set; }
         private Frame frame;
+        AgreementDocumentPage document;
         FinansePage finanse;
-        HomePage home;
         EmployeePage employee;
         AgreementPage agreement;
         TentantPage tentant;
         TPKZonePage tPKZone;
+        ExpensesPage expenses;
         public MainWindowMvvm()
-        { 
-       
+        {
+            PageNavigationDocument = new CommandMvvm(() =>
+            {
+                if (document == null)
+                {
+                    document = new AgreementDocumentPage();
+                }
+                frame.Navigate(document);
+            },
+            () => true);
+
             PageNavigationF = new CommandMvvm(() =>
             {
                 if (finanse == null)
@@ -77,19 +88,23 @@ namespace Kursach_1125.VM
             },
             () => true);
 
-            PageNavigation = new CommandMvvm(() =>
+            PageNavigationExpenses = new CommandMvvm(() =>
             {
-                frame.Navigate(home);
+                if (expenses == null)
+                {
+                    expenses = new ExpensesPage();
+                }
+                frame.Navigate(expenses);
             },
-            ()=> true);
+            () => true);
         }
 
         internal void SetFrame(Frame frame)
         {
             this.frame = frame;
 
-            home = new HomePage();
-            frame.Navigate(home);
+            agreement = new AgreementPage();
+            frame.Navigate(agreement);
         }
     }
 }

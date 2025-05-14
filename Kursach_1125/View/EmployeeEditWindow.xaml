@@ -36,17 +36,17 @@
             <TextBlock Text="Должность" Style="{DynamicResource text}"/>
             <TextBlock Text="ТПК Зона" Style="{DynamicResource text}"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" DataContext="{Binding NewEmployee}">
-            <TextBox Style="{DynamicResource Box}" Text="{Binding FIO, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox Style="{DynamicResource Box}" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Column="1">
+            <TextBox Style="{DynamicResource Box}" Text="{Binding NewEmployee.FIO, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{DynamicResource Box}" Text="{Binding NewEmployee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox Style="{DynamicResource Combo}"
-            ItemsSource="{Binding DataContext.JobTitlesList, RelativeSource={RelativeSource AncestorType=Window}}"
-            SelectedItem="{Binding JobTitles}"
-            DisplayMemberPath="Title"/>
+            ItemsSource="{Binding JobTitlesList}"
+              SelectedItem="{Binding NewEmployee.JobTitles}"
+              DisplayMemberPath="Title"/>
             <ComboBox Style="{DynamicResource Combo}"
-            ItemsSource="{Binding DataContext.TPKZonesList, RelativeSource={RelativeSource AncestorType=Window}}"
-            SelectedItem="{Binding TPKZones}"
-            DisplayMemberPath="Title"/>
+            ItemsSource="{Binding TPKZonesList}"
+              SelectedItem="{Binding NewEmployee.TPKZones}"
+              DisplayMemberPath="Title"/>
         </StackPanel>
         <Button Content="Сохранить" Command="{Binding InsertEmployee}" Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
     </Grid>

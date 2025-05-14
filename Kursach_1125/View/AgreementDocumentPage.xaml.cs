@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Kursach_1125.View
 {
     /// <summary>
-    /// Логика взаимодействия для Home.xaml
+    /// Логика взаимодействия для AgreementDocumentPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class AgreementDocumentPage : Page
     {
-        public HomePage()
+        public AgreementDocumentPage()
         {
             InitializeComponent();
         }

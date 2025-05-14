@@ -45,7 +45,6 @@ namespace Kursach_1125.VM
             UpdateZone = new CommandMvvm(() =>
             {
                 new TPKZoneEditWindow(SelectedZone).ShowDialog();
-                TPKZoneDB.GetDB().Remove(SelectedZone);
                 SelectAll();
             }, () => SelectedZone != null);
 

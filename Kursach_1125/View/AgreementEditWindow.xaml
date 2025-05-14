@@ -38,19 +38,19 @@
             <TextBlock Text="Статус" Style="{DynamicResource text}"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="20,10,20,0" DataContext="{Binding NewAgreement}">
+        <StackPanel Grid.Column="1" Margin="20,10,20,0">
             <ComboBox Height="25" Margin="0 0 0 20"
-            ItemsSource="{Binding DataContext.TPKZonesList, RelativeSource={RelativeSource AncestorType=Window}}"
-            SelectedItem="{Binding TPKZones}"
-            DisplayMemberPath="Title"/>
+            ItemsSource="{Binding TPKZonesList}"
+              SelectedItem="{Binding NewAgreement.TPKZones}"
+              DisplayMemberPath="Title"/>
             <ComboBox Height="25" Margin="0 0 0 26"
-            ItemsSource="{Binding DataContext.TentantsList, RelativeSource={RelativeSource AncestorType=Window}}"
-            SelectedItem="{Binding Tentants}"
-            DisplayMemberPath="Title"/>
-            <DatePicker Height="25" Margin="0 0 0 25" Text="{Binding DateOfString}"/>
-            <DatePicker Height="25" Margin="0 0 0 24" Text="{Binding EndDate}"/>
-            <TextBox Style="{DynamicResource Box}" Text="{Binding RentalRate}"/>
-            <CheckBox Content="Действует ли договор" Height="25" IsChecked="{Binding Status}"/>
+            ItemsSource="{Binding TentantsList}"
+              SelectedItem="{Binding NewAgreement.Tentants}"
+              DisplayMemberPath="Title"/>
+            <DatePicker Height="25" Margin="0 0 0 25" SelectedDate="{Binding NewAgreement.DateOfString, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker Height="25" Margin="0 0 0 24" SelectedDate="{Binding NewAgreement.EndDate, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{DynamicResource Box}" Text="{Binding NewAgreement.RentalRate, UpdateSourceTrigger=PropertyChanged}"/>
+            <CheckBox Content="Действует ли договор" Height="25" IsChecked="{Binding NewAgreement.Status, UpdateSourceTrigger=PropertyChanged}"/>
 
         </StackPanel>
         <Button Content="Сохранить изменения" Command="{Binding InsertAgreement}" Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>

@@ -40,7 +40,7 @@
 
         <StackPanel Grid.Column="1" Margin="10 30 10 30">
             <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddEmployee}"/>
-            <Button Content="Редактировать" Style="{DynamicResource Button}"/>
+            <Button Content="Редактировать" Style="{DynamicResource Button}" Command="{Binding UpdateEmployee}"/>
             <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveEmployee}"/>
         </StackPanel>
         
