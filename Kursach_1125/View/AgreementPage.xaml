@@ -11,41 +11,44 @@
       Title="AgreementPage">
     <Page.Resources>
         <mvvm:AgreementPageMvvm x:Key="vm"/>
-        <Style x:Key="Button" TargetType="Button">
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Margin" Value="0 10 0 10"/>
-        </Style>
     </Page.Resources>
-    <Grid>
+    <Grid Background="#F3F4F6">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1.2*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Margin="30 10 30 10">
-            <TextBlock Text="Договор" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="16"/>
-            <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Agreements}" SelectedItem="{Binding SelectedAgreement}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Кампания" DisplayMemberBinding="{Binding Tentants.Title}"/>
-                        <GridViewColumn Header="Контактное лицо" DisplayMemberBinding="{Binding Tentants.ContactPerson}"/>
-                        <GridViewColumn Header="ТПК Зона" DisplayMemberBinding="{Binding TPKZones.Title}"/>
-                        <GridViewColumn Header="Дата подписания" DisplayMemberBinding="{Binding DateOfString}"/>
-                        <GridViewColumn Header="Дата окончания" DisplayMemberBinding="{Binding EndDate}"/>
-                        <GridViewColumn Header="Арендная плата" DisplayMemberBinding="{Binding RentalRate}"/>
-                        <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Status}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+        <!-- Левая часть: Договоры -->
+        <Border Style="{StaticResource CardStyle}" Margin="40 40 20 40">
+            <StackPanel>
+                <TextBlock Text="Договоры" Style="{StaticResource TitleText}"/>
+                <ListView Height="250" 
+                      ItemsSource="{Binding Agreements}" 
+                      SelectedItem="{Binding SelectedAgreement}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Кампания" DisplayMemberBinding="{Binding Tentants.Title}"/>
+                            <GridViewColumn Header="Контактное лицо" DisplayMemberBinding="{Binding Tentants.ContactPerson}"/>
+                            <GridViewColumn Header="ТПК Зона" DisplayMemberBinding="{Binding TPKZones.Title}"/>
+                            <GridViewColumn Header="Дата подписания" DisplayMemberBinding="{Binding DateOfString}"/>
+                            <GridViewColumn Header="Дата окончания" DisplayMemberBinding="{Binding EndDate}"/>
+                            <GridViewColumn Header="Арендная плата" DisplayMemberBinding="{Binding RentalRate}"/>
+                            <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Status}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Border>
 
-        <StackPanel Grid.Column="1" Margin="10 30 10 30">
-            <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddAgreement}"/>
-            <Button Content="Редактировать" Style="{DynamicResource Button}" Command="{Binding UpdateAgreement}"/>
-            <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveAgreement}"/>
-            <Button Content="Создать договор" Style="{DynamicResource Button}" Command="{Binding CreateDocAgreement}"/>
-        </StackPanel>
-
+        <!-- Правая часть: Кнопки -->
+        <Border Style="{StaticResource CardStyle}" Grid.Column="1" Margin="0 40 40 40" VerticalAlignment="Top">
+            <StackPanel VerticalAlignment="Center">
+                <Button Content="Добавить" Style="{StaticResource AccentButton}" Command="{Binding AddAgreement}"/>
+                <Button Content="Редактировать" Style="{StaticResource AccentButton}" Command="{Binding UpdateAgreement}" Background="#F59E42"/>
+                <Button Content="Удалить" Style="{StaticResource AccentButton}" Command="{Binding RemoveAgreement}" Background="#EF4444"/>
+                <Button Content="Создать договор" Style="{StaticResource AccentButton}" Command="{Binding CreateDocAgreement}" Background="#10B981"/>
+            </StackPanel>
+        </Border>
     </Grid>
+
 </Page>

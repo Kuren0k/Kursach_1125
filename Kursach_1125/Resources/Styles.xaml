@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Карточка -->
+    <Style x:Key="CardStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="16"/>
+        <Setter Property="Background" Value="#FFF"/>
+        <Setter Property="Margin" Value="0 0 0 20"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.18"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Заголовок -->
+    <Style x:Key="TitleText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#2D415A"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 0 0 30"/>
+    </Style>
+
+    <!-- Кнопка -->
+    <Style x:Key="AccentButton" TargetType="Button">
+        <Setter Property="Background" Value="#3B82F6"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Height" Value="44"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="6" ShadowDepth="1" Opacity="0.15"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
