@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach_1125.View"
+        xmlns:mvvm="clr-namespace:Kursach_1125.VM"
         mc:Ignorable="d"
+        DataContext="{DynamicResource vm}"
         Title="EmployeeEditWindow" Height="450" Width="400">
     <Window.Resources>
+        <mvvm:EmployeeEditWindowMvvm x:Key="vm"/>
         <Style x:Key="text" TargetType="TextBlock">
             <Setter Property="Margin" Value="0 15 0 0"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -28,23 +31,23 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <TextBlock Text="Имя" Style="{DynamicResource text}"/>
-            <TextBlock Text="Фамилия" Style="{DynamicResource text}"/>
-            <TextBlock Text="Отчество" Style="{DynamicResource text}"/>
+            <TextBlock Text="ФИО" Style="{DynamicResource text}"/>
             <TextBlock Text="Номер" Style="{DynamicResource text}"/>
-            <TextBlock Text="Название работы" Style="{DynamicResource text}"/>
+            <TextBlock Text="Должность" Style="{DynamicResource text}"/>
             <TextBlock Text="ТПК Зона" Style="{DynamicResource text}"/>
-            <TextBlock Text="Флюрография" Style="{DynamicResource text}"/>
         </StackPanel>
-        <StackPanel Grid.Column="1">
-            <TextBox Style="{DynamicResource Box}"/>
-            <TextBox Style="{DynamicResource Box}"/>
-            <TextBox Style="{DynamicResource Box}"/>
-            <TextBox Style="{DynamicResource Box}"/>
-            <ComboBox Style="{DynamicResource Combo}"/>
-            <ComboBox Style="{DynamicResource Combo}"/>
-            <CheckBox Margin="10 15 10 0"/>
+        <StackPanel Grid.Column="1" DataContext="{Binding NewEmployee}">
+            <TextBox Style="{DynamicResource Box}" Text="{Binding FIO, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{DynamicResource Box}" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox Style="{DynamicResource Combo}"
+            ItemsSource="{Binding DataContext.JobTitlesList, RelativeSource={RelativeSource AncestorType=Window}}"
+            SelectedItem="{Binding JobTitles}"
+            DisplayMemberPath="Title"/>
+            <ComboBox Style="{DynamicResource Combo}"
+            ItemsSource="{Binding DataContext.TPKZonesList, RelativeSource={RelativeSource AncestorType=Window}}"
+            SelectedItem="{Binding TPKZones}"
+            DisplayMemberPath="Title"/>
         </StackPanel>
-        <Button Content="Сохранить"  Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
+        <Button Content="Сохранить" Command="{Binding InsertEmployee}" Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
     </Grid>
 </Window>

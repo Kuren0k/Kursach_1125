@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kursach_1125.Model;
+using Kursach_1125.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace Kursach_1125.View
     /// </summary>
     public partial class EmployeeEditWindow : Window
     {
-        public EmployeeEditWindow()
+        public EmployeeEditWindow(Employee employee)
         {
             InitializeComponent();
+            ((EmployeeEditWindowMvvm)this.DataContext).SetClose(Close);
         }
     }
 }

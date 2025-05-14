@@ -152,7 +152,8 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Agreement` set `TentantID`=@tentantID, `TPKZoneID`=@tpkZoneID, `DateOfSigning`=@dateOfS, `EndDate`=@endDate, `RentalRate`=@rentalRate, `Status`=@status where `ID` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Agreement` set `TentantID`=@tentantID, `TPKZoneID`=@tpkZoneID, `DateOfSigning`=@dateOfS, " +
+                    $"`EndDate`=@endDate, `RentalRate`=@rentalRate, `Status`=@status where `ID` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("tentantID", edit.TentantID));
                 mc.Parameters.Add(new MySqlParameter("tpkZoneID", edit.TPKZoneID));
                 mc.Parameters.Add(new MySqlParameter("dateOfS", edit.DateOfString));

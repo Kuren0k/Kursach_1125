@@ -4,10 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach_1125.View"
+      xmlns:mvvm="clr-namespace:Kursach_1125.VM"
       mc:Ignorable="d" 
+      DataContext="{DynamicResource vm}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EmployeePage">
     <Page.Resources>
+        <mvvm:EmployeePageMvvm x:Key="vm"/>
         <Style x:Key="Button" TargetType="Button">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -22,13 +25,23 @@
 
         <StackPanel Margin="30 10 30 10">
             <TextBlock Text="Работники" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="16"/>
-            <ListView Height="300" Margin="0 20 0 0"/>
+            <ListView Height="300" Margin="0 20 0 0" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FIO}"/>
+                        <GridViewColumn Header="ТПК Зона" DisplayMemberBinding="{Binding TPKZones.Title}"/>
+                        <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding JobTitles.Title}"/>
+                        <GridViewColumn Header="Зарплата" DisplayMemberBinding="{Binding JobTitles.Wages}"/>
+                        <GridViewColumn Header="Номер телефонa" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10 30 10 30">
-            <Button Content="Добавить" Style="{DynamicResource Button}"/>
+            <Button Content="Добавить" Style="{DynamicResource Button}" Command="{Binding AddEmployee}"/>
             <Button Content="Редактировать" Style="{DynamicResource Button}"/>
-            <Button Content="Удалить" Style="{DynamicResource Button}"/>
+            <Button Content="Удалить" Style="{DynamicResource Button}" Command="{Binding RemoveEmployee}"/>
         </StackPanel>
         
     </Grid>

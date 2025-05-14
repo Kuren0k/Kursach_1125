@@ -65,9 +65,9 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select e.`ID`, `JobTitleID`, `TPKZoneID`, `FIO`, `ContactPhoneNumber`, j.`Title`, j.`Task`, j.`ID`, " +
-                    "t.`Title`, t.`Floor`, t.`ID`," +
-                    "from `Employee` e JOIN `JobTitle` j ON `JobTitleID` = j.ID JOIN `TPKZone` t ON `TPKZoneID` = t.`ID`");
+                var command = connection.CreateCommand("select e.`ID`, `JobTitleID`, `TPKZoneID`, `FIO`, `ContactPhoneNumber`, j.`Title` as jTitle, j.`Task` as jTask, j.`Wages`, j.`ID`, " +
+                    "t.`Title` as tTitle, t.`Floor`, t.`ID`" +
+                    "from `Employee` e JOIN `JobTitle` j ON `JobTitleID` = j.`ID` JOIN `TPKZone` t ON `TPKZoneID` = t.`ID`");
                 try
                 {
                     MySqlDataReader dr = command.ExecuteReader();
@@ -83,21 +83,46 @@ namespace Kursach_1125.Model
                         string contact = string.Empty;
                         if (!dr.IsDBNull(4))
                             contact = dr.GetString("ContactPhoneNumber");
-                        string tTitle = string.Empty;
+                        string jTitle = string.Empty;
                         if (!dr.IsDBNull(5))
-                            tTitle = dr.GetString("tTitle");
+                            jTitle = dr.GetString("jTitle");
                         string task = string.Empty;
                         if (!dr.IsDBNull(6))
                             task = dr.GetString("jTask");
+                        int wages = 0;
+                        if (!dr.IsDBNull(7))
+                            wages = dr.GetInt32(7);
+                        int idjob = dr.GetInt32(8);
+                        string tTitle = string.Empty;
+                        if (!dr.IsDBNull(9))
+                            tTitle = dr.GetString("tTitle");
+                        int floor = 0;
+                        if (!dr.IsDBNull(10))
+                            floor = dr.GetInt32(10);
+                        int idTPK = dr.GetInt32(11);
+
+                        TPKZone tPKZone = new TPKZone();
+
+                        tPKZone.Id = idTPK;
+                        tPKZone.Title = tTitle;
+                        tPKZone.Floor = floor;
+
+                        JobTitle jobTitle = new JobTitle();
+
+                        jobTitle.Id = idjob;
+                        jobTitle.Title = jTitle;
+                        jobTitle.Task = task;
+                        jobTitle.Wages = wages;
 
                         employees.Add(new Employee
                         {
                             Id = id,
-                            Title = title,
-                            ContactPerson = contact,
-                            PhoneNumber = phone,
-                            Email = email,
-                            RentalStartDate = rentalStart
+                            JobTitleID = jobid,
+                            TPKZoneID = tPKid,
+                            FIO = fio,
+                            PhoneNumber = contact,
+                            JobTitles = jobTitle,
+                            TPKZones = tPKZone
                         });
                     }
                 }
@@ -110,7 +135,7 @@ namespace Kursach_1125.Model
             return employees;
         }
 
-        internal bool Update(Tentant tentant)
+        internal bool Update(Employee employee)
         {
             bool result = false;
             if (connection == null)
@@ -118,12 +143,11 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Tentant` set `Title`=@title, `ContactPerson`=@contactPerson, `PhoneNumber`=@phoneNumber, `Email`=@email, `RentalStartDate`=@rentalStartDate where `ID` = {tentant.Id}");
-                mc.Parameters.Add(new MySqlParameter("title", tentant.Title));
-                mc.Parameters.Add(new MySqlParameter("contactPerson", tentant.ContactPerson));
-                mc.Parameters.Add(new MySqlParameter("phoneNumber", tentant.PhoneNumber));
-                mc.Parameters.Add(new MySqlParameter("email", tentant.Email));
-                mc.Parameters.Add(new MySqlParameter("rentalStartDate", tentant.RentalStartDate));
+                var mc = connection.CreateCommand($"update `Employee` set `JobTitleID`=@jobId, `TPKZoneID`=@tpkId, `FIO`=@fio, `ContactPhoneNumber`=@phone where `ID` = {employee.Id}");
+                mc.Parameters.Add(new MySqlParameter("jobId", employee.JobTitleID));
+                mc.Parameters.Add(new MySqlParameter("tpkId", employee.TPKZoneID));
+                mc.Parameters.Add(new MySqlParameter("fio", employee.FIO));
+                mc.Parameters.Add(new MySqlParameter("phone", employee.PhoneNumber));
 
                 try
                 {
@@ -139,7 +163,7 @@ namespace Kursach_1125.Model
             return result;
         }
 
-        internal bool Remove(Tentant remove)
+        internal bool Remove(Employee remove)
         {
             bool result = false;
             if (connection == null)
@@ -147,7 +171,7 @@ namespace Kursach_1125.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Tentant` where `ID` = {remove.Id}");
+                var mc = connection.CreateCommand($"delete from `Employee` where `ID` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -162,11 +186,11 @@ namespace Kursach_1125.Model
             return result;
         }
 
-        static TentantDB db;
-        public static TentantDB GetDB()
+        static EmployeeDB db;
+        public static EmployeeDB GetDB()
         {
             if (db == null)
-                db = new TentantDB(DBConnection.GetDbConnection());
+                db = new EmployeeDB(DBConnection.GetDbConnection());
             return db;
         }
     }

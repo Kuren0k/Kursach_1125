@@ -13,5 +13,7 @@ namespace Kursach_1125.Model
         public int TPKZoneID { get; set; }
         public string FIO { get; set; }
         public string PhoneNumber { get; set; }
+        public TPKZone TPKZones { get; set; }
+        public JobTitle JobTitles { get; set; }
     }
 }
