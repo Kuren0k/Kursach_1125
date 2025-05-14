@@ -7,7 +7,8 @@
         xmlns:mvvm="clr-namespace:Kursach_1125.VM"
         mc:Ignorable="d"
         DataContext="{DynamicResource vm}"
-        Title="MainWindow" Height="470" Width="900">
+        Style="{StaticResource ModernWindow}"
+        Title="MainWindow" Height="500" Width="900">
     <Window.Resources>
         <mvvm:MainWindowMvvm x:Key="vm"/>
         <Style x:Key="ParentButton" TargetType="Button">
@@ -22,15 +23,15 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel VerticalAlignment="Top">
-            <Button Style="{StaticResource ParentButton}" Content="Договоры" Command="{Binding PageNavigationAgreement}"/>
-            <Button Style="{StaticResource ParentButton}" Content="Документы договоров" Command="{Binding PageNavigationDocument}"/>
-            <Button Style="{StaticResource ParentButton}" Content="Финансы" Command="{Binding PageNavigationF}"/>
-            <Button Style="{StaticResource ParentButton}" Content="Работники" Command="{Binding PageNavigationEm}"/>
-            <Button Style="{StaticResource ParentButton}" Content="Арендодатели" Command="{Binding PageNavigationTentant}"/>
-            <Button Style="{StaticResource ParentButton}" Content="ТПК Зоны" Command="{Binding PageNavigationTPK}"/>
-            <Button Style="{StaticResource ParentButton}" Content="Расходы" Command="{Binding PageNavigationExpenses}"/>
+            <Button Style="{StaticResource ModernMenuButton}" Content="Договоры" Command="{Binding PageNavigationAgreement}"/>
+            <Button Style="{StaticResource ModernMenuButton}" Content="Документы договоров" Command="{Binding PageNavigationDocument}"/>
+            <Button Style="{StaticResource ModernMenuButton}" Content="Финансы" Command="{Binding PageNavigationF}"/>
+            <Button Style="{StaticResource ModernMenuButton}" Content="Работники" Command="{Binding PageNavigationEm}"/>
+            <Button Style="{StaticResource ModernMenuButton}" Content="Арендодатели" Command="{Binding PageNavigationTentant}"/>
+            <Button Style="{StaticResource ModernMenuButton}" Content="ТПК Зоны" Command="{Binding PageNavigationTPK}"/>
+            <Button Style="{StaticResource ModernMenuButton}" Content="Расходы" Command="{Binding PageNavigationExpenses}"/>
         </StackPanel>
 
-        <Frame Grid.Column="1" x:Name="frame" NavigationUIVisibility="Hidden" BorderThickness="2"/>
+        <Frame Grid.Column="1" x:Name="frame" NavigationUIVisibility="Hidden" Style="{StaticResource ModernFrame}"/>
     </Grid>
 </Window>

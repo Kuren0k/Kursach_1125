@@ -7,6 +7,7 @@
         xmlns:mvvm="clr-namespace:Kursach_1125.VM"
         mc:Ignorable="d"
         DataContext="{DynamicResource vm}"
+        Style="{StaticResource ModernWindow}"
         Title="TPKZoneEditWindow" Height="450" Width="400">
     <Window.Resources>
         <mvvm:TPKZoneEditWindowMvvm x:Key="vm"/>
@@ -30,16 +31,16 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Margin="0,30,0,0">
-            <TextBlock Text="Название" Style="{DynamicResource text}"/>
-            <TextBlock Text="Этаж" Style="{DynamicResource text}"/>
-            <TextBlock Text="Площадь" Style="{DynamicResource text}"/>
+            <TextBlock Text="Название" Style="{StaticResource ModernLabel}"/>
+            <TextBlock Text="Этаж" Style="{StaticResource ModernLabel}"/>
+            <TextBlock Text="Площадь" Style="{StaticResource ModernLabel}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="20,30,20,0" DataContext="{Binding NewZone}">
-            <TextBox Style="{DynamicResource Box}" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox Style="{DynamicResource Box}" Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox Style="{DynamicResource Box}" Text="{Binding Square, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding Square, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-        <Button Content="Сохранить изменения" Command="{Binding InsertZone}" Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
+        <Button Content="Сохранить изменения" Command="{Binding InsertZone}" Grid.ColumnSpan="2" Style="{StaticResource ModernButton}"/>
     </Grid>
 </Window>

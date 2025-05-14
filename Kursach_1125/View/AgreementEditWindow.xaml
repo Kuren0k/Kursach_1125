@@ -7,20 +7,10 @@
         xmlns:local="clr-namespace:Kursach_1125.View"
         mc:Ignorable="d"
         DataContext="{DynamicResource vm}"
+        Style="{StaticResource ModernWindow}"
         Title="AgreementEditWindow" Height="450" Width="400">
     <Window.Resources>
         <mvvm:AgreementEditWindowMvvm x:Key="vm"/>
-        <Style x:Key="Box" TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Margin" Value="0 0 0 30"/>
-        </Style>
-        <Style x:Key="text" TargetType="TextBlock">
-            <Setter Property="Margin" Value="0 0 0 30"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
     </Window.Resources>
     
     <Grid>
@@ -30,29 +20,29 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Margin="0,10,0,0">
-            <TextBlock Text="ТПК Зона" Style="{DynamicResource text}"/>
-            <TextBlock Text="Арендодатель" Style="{DynamicResource text}"/>
-            <TextBlock Text="Дата подписания" Style="{DynamicResource text}"/>
-            <TextBlock Text="Дата окончания" Style="{DynamicResource text}"/>
-            <TextBlock Text="Арендная плата" Style="{DynamicResource text}"/>
-            <TextBlock Text="Статус" Style="{DynamicResource text}"/>
+            <TextBlock Text="ТПК Зона" Style="{StaticResource ModernLabel}"/>
+            <TextBlock Text="Арендодатель" Style="{StaticResource ModernLabel}"/>
+            <TextBlock Text="Дата подписания" Style="{StaticResource ModernLabel}"/>
+            <TextBlock Text="Дата окончания" Style="{StaticResource ModernLabel}"/>
+            <TextBlock Text="Арендная плата" Style="{StaticResource ModernLabel}"/>
+            <TextBlock Text="Статус" Style="{StaticResource ModernLabel}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="20,10,20,0">
-            <ComboBox Height="25" Margin="0 0 0 20"
+            <ComboBox Style="{StaticResource ModernComboBox}"
             ItemsSource="{Binding TPKZonesList}"
               SelectedItem="{Binding NewAgreement.TPKZones}"
               DisplayMemberPath="Title"/>
-            <ComboBox Height="25" Margin="0 0 0 26"
+            <ComboBox Style="{StaticResource ModernComboBox}"
             ItemsSource="{Binding TentantsList}"
               SelectedItem="{Binding NewAgreement.Tentants}"
               DisplayMemberPath="Title"/>
-            <DatePicker Height="25" Margin="0 0 0 25" SelectedDate="{Binding NewAgreement.DateOfString, UpdateSourceTrigger=PropertyChanged}"/>
-            <DatePicker Height="25" Margin="0 0 0 24" SelectedDate="{Binding NewAgreement.EndDate, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox Style="{DynamicResource Box}" Text="{Binding NewAgreement.RentalRate, UpdateSourceTrigger=PropertyChanged}"/>
-            <CheckBox Content="Действует ли договор" Height="25" IsChecked="{Binding NewAgreement.Status, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker Style="{StaticResource ModernDatePicker}" SelectedDate="{Binding NewAgreement.DateOfString, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker  Style="{StaticResource ModernDatePicker}" SelectedDate="{Binding NewAgreement.EndDate, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding NewAgreement.RentalRate, UpdateSourceTrigger=PropertyChanged}"/>
+            <CheckBox Content="Действует ли договор" Style="{StaticResource ModernCheckBox}" IsChecked="{Binding NewAgreement.Status, UpdateSourceTrigger=PropertyChanged}"/>
 
         </StackPanel>
-        <Button Content="Сохранить изменения" Command="{Binding InsertAgreement}" Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
+        <Button Content="Сохранить изменения" Command="{Binding InsertAgreement}" Grid.ColumnSpan="2" Style="{StaticResource ModernButton}"/>
     </Grid>
 </Window>

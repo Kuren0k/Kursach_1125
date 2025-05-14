@@ -6,24 +6,22 @@
       xmlns:local="clr-namespace:Kursach_1125.View"
       xmlns:vms="clr-namespace:Kursach_1125.VM" 
       xmlns:lvc1="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FinansePage">
     <Page.DataContext>
         <vms:FinansePageMvvm/>
     </Page.DataContext>
-    <Grid>
+    <Grid Background="#F3F4F6" Margin="20">
 
         <StackPanel>
-            <TextBlock Text="Соотошение доходов и расходов" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="14" TextWrapping="Wrap"/>
-            <lvc1:PieChart Height="350" LegendLocation="Bottom" Hoverable="False" Margin="0,30,0,0">
+            <TextBlock Text="Соотошение доходов и расходов" HorizontalAlignment="Center" Style="{StaticResource TitleText}"/>
+            <lvc1:PieChart Height="300" LegendLocation="Bottom" Hoverable="False" Margin="0,30,0,0">
                 <lvc1:PieChart.Series>
                     <lvc1:PieSeries Title="Доход" Values="{Binding FinansePieChartModel.IncomeDataSeries}" DataLabels="True"/>
                     <lvc1:PieSeries Title="Расходы" Values="{Binding FinansePieChartModel.ConsumptionDataSeries}" DataLabels="True"/>
                 </lvc1:PieChart.Series>
             </lvc1:PieChart>
         </StackPanel>
-
-        
     </Grid>
 </Page>

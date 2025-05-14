@@ -7,37 +7,27 @@
         xmlns:mvvm="clr-namespace:Kursach_1125.VM"
         mc:Ignorable="d"
         DataContext="{DynamicResource vm}"
+        Style="{StaticResource ModernWindow}"
         Title="ExpensesEditWindow" Height="450" Width="400">
     <Window.Resources>
         <mvvm:ExpensesEditWindowMvvm x:Key="vm"/>
-        <Style x:Key="Box" TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Margin" Value="0 0 0 30"/>
-        </Style>
-        <Style x:Key="text" TargetType="TextBlock">
-            <Setter Property="Margin" Value="0 0 0 35"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
     </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1.3*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Margin="0,10,0,0">
-            <TextBlock Text="Название категории" Style="{DynamicResource text}"/>
-            <TextBlock Text="Стоимость" Style="{DynamicResource text}"/>
+            <TextBlock Text="Название категории" Style="{StaticResource ModernLabel}" Margin="0,0,0,38"/>
+            <TextBlock Text="Стоимость" Style="{StaticResource ModernLabel}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="20,16,20,0" DataContext="{Binding NewExpenses}">
-            <TextBox Style="{DynamicResource Box}" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,40"/>
-            <TextBox Style="{DynamicResource Box}" Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-        <Button Content="Сохранить изменения" Command="{Binding InsertExpenses}" Grid.ColumnSpan="2" Height="40" Width="200" VerticalAlignment="Bottom" Margin="0 0 0 40" FontSize="16" FontWeight="Bold"/>
+        <Button Content="Сохранить изменения" Command="{Binding InsertExpenses}" Grid.ColumnSpan="2" Style="{StaticResource ModernButton}"/>
     </Grid>
 </Window>

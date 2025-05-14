@@ -11,11 +11,6 @@
       Title="ExpensesPage">
     <Page.Resources>
         <mvvm:ExpensesPageMvvm x:Key="vm"/>
-        <Style x:Key="Button" TargetType="Button">
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Margin" Value="0 10 0 10"/>
-        </Style>
     </Page.Resources>
     <Grid Background="#F3F4F6" Margin="20">
         <Grid.ColumnDefinitions>
