@@ -13,15 +13,17 @@
         <vms:FinansePageMvvm/>
     </Page.DataContext>
     <Grid Background="#F3F4F6" Margin="20">
-
-        <StackPanel>
-            <TextBlock Text="Соотошение доходов и расходов" HorizontalAlignment="Center" Style="{StaticResource TitleText}"/>
-            <lvc1:PieChart Height="300" LegendLocation="Bottom" Hoverable="False" Margin="0,30,0,0">
-                <lvc1:PieChart.Series>
-                    <lvc1:PieSeries Title="Доход" Values="{Binding FinansePieChartModel.IncomeDataSeries}" DataLabels="True"/>
-                    <lvc1:PieSeries Title="Расходы" Values="{Binding FinansePieChartModel.ConsumptionDataSeries}" DataLabels="True"/>
-                </lvc1:PieChart.Series>
-            </lvc1:PieChart>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Соотошение доходов и расходов" HorizontalAlignment="Center" Style="{StaticResource TitleText}" Grid.ColumnSpan="2"/>
+        <lvc1:PieChart Height="300" LegendLocation="Bottom" Hoverable="False" Margin="0,60,0,40" Width="420" HorizontalAlignment="Left">
+            <lvc1:PieChart.Series>
+                <lvc1:PieSeries Title="Доход" Values="{Binding FinansePieChartModel.IncomeDataSeries}" DataLabels="True"/>
+                <lvc1:PieSeries Title="Расходы" Values="{Binding FinansePieChartModel.ConsumptionDataSeries}" DataLabels="True"/>
+            </lvc1:PieChart.Series>
+        </lvc1:PieChart>
+        <TextBlock Text="{Binding ProfitF}" Style="{StaticResource ModernLabel}" Grid.Column="1" Margin="0,100,0,30"/>
     </Grid>
 </Page>

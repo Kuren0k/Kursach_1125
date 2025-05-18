@@ -140,7 +140,7 @@ namespace Kursach_1125.Model
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Удаление невозможно, элемент связан с другой таблицей");
                 }
             }
             connection.CloseConnection();

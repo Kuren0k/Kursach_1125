@@ -16,7 +16,9 @@ namespace Kursach_1125.VM
         public FinansePieChartDataModel FinansePieChartModel { get; set; }
         public Func<ChartPoint, string> PointLabel { get; set; }
 
-        
+        private int Profit { get; set; }
+        public string ProfitF { get; set; }
+
         public FinansePageMvvm()
         {
             SelectAll();
@@ -32,6 +34,8 @@ namespace Kursach_1125.VM
             totalCost += allEmployee.Sum(e => e.JobTitles.Wages);
             int totalIncome = allAgreement.Sum(e => e.RentalRate);
             FinansePieChartModel = new FinansePieChartDataModel(totalCost, totalIncome);
+            Profit = totalIncome - totalCost;
+            ProfitF = "Чистая прибыль: " + Profit.ToString() + " ₽";
         }
     }
 }

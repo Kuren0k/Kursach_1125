@@ -45,7 +45,7 @@
         <Border Style="{StaticResource CardStyle}" Grid.Column="1" VerticalAlignment="Top">
             <StackPanel>
                 <Button Content="Добавить" Style="{StaticResource AccentButton}" Command="{Binding AddEmployee}"/>
-                <Button Content="Редактировать" Style="{StaticResource AccentButton}" Command="{Binding UpdateEmployee}"/>
+                <Button Content="Редактировать" Style="{StaticResource AccentButton}" Command="{Binding UpdateEmployee}" Background="#F59E42" Cursor="Hand"/>
                 <Button Content="Удалить" Style="{StaticResource AccentButton}" Command="{Binding RemoveEmployee}" Background="#EF4444"/>
             </StackPanel>
         </Border>
